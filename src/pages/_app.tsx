@@ -14,7 +14,6 @@ interface AppPropsWithProps extends AppProps {
 }
 const App = ({ Component, pageProps, ...props }: AppPropsWithProps) => {
   const intialData = useRef(props.props);
-
   return (
     <ConfigContext.Provider value={intialData.current}>
       <ThemeProvider attribute="class" storageKey="theme">
