@@ -6,32 +6,31 @@ on:
       - main
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    outputs:
-      new-release-published: ${{ steps.release.outputs.new-release-published }}
-      new-release-version: ${{ steps.release.outputs.new-release-version }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - name: Run semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        id: release
-        run: |
-          npm install
-          npx semantic-release
+  # release:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   outputs:
+  #     new-release-published: ${{ steps.release.outputs.new-release-published }}
+  #     new-release-version: ${{ steps.release.outputs.new-release-version }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 20
+  #     - name: Run semantic-release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       id: release
+  #       run: |
+  #         npm install
+  #         npx semantic-release
 
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-    needs: release
     steps:
       - uses: actions/checkout@v3
       - uses: docker/metadata-action@v5
