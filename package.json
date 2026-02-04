@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "author": {
-    "name": "Varun Raj Manoharan",
-    "email": "varun@skcript.com",
-    "url": "https://varunraj.in"
+    "name": "Sai Charan Guntupalli",
+    "email": "me@saicharang.com",
+    "url": "https://saicharang.com"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

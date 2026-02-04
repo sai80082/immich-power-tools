@@ -1,3 +1,6 @@
+> [!NOTE]
+> This project is a fork of [varun-raj/immich-power-tools](https://github.com/varun-raj/immich-power-tools). The original maintainer was inactive for a while, so I decided to continue development by adding new features.
+
 # ![Logo](./public/favicon-32x32.png) Immich Power Tools
 
 A unofficial immich client to provide better tools to organize and manage your immich account. Building it to speed up your workflows in Immich to organize your people and albums.
@@ -14,12 +17,6 @@ A unofficial immich client to provide better tools to organize and manage your i
 - **Analytics 📈**: Get analytics on your library like assets over time, exif data, etc.
 - **Smart Search 🔎**: Search your library with natural language, supports queries like "show me all my photos from 2024 of <person name>"
 - **Bulk Date Offset 📅**: Offset the date of selected assets by a given amount of time. Majorly used to fix the date of assets that are out of sync with the actual date.
-
-### Support me 🙏
-
-If you find this tool useful, please consider supporting me by buying me a coffee.
-
-[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/varunraj)
 
 ## 💭 Back story
 
@@ -41,7 +38,7 @@ services:
   # Other services...
   power-tools:
     container_name: immich_power_tools
-    image: ghcr.io/varun-raj/immich-power-tools:latest
+    image: ghcr.io/sai80082/immich-power-tools:latest
     ports:
       - "8001:3000"
     env_file:
@@ -73,7 +70,7 @@ If you're using portainer, run the docker using `docker run` and add the power t
 
 ```bash
 # Run the power tools from docker 
-docker run -d --name immich_power_tools -p 8001:3000 --env-file .env ghcr.io/varun-raj/immich-power-tools:latest
+docker run -d --name immich_power_tools -p 8001:3000 --env-file .env ghcr.io/sai80082/immich-power-tools:latest
 
 # Add Power tools to the same network as immich
 docker network connect immich_default immich_power_tools

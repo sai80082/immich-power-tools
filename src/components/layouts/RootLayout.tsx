@@ -58,7 +58,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <Link
                 className="flex items-center gap-2 text-xs"
                 href={
-                  "https://github.com/varun-raj/immich-power-tools?tab=readme-ov-file#-getting-started"
+                  "https://github.com/sai80082/immich-power-tools?tab=readme-ov-file#-getting-started"
                 }
                 target="_blank"
               >

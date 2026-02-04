@@ -43,28 +43,12 @@ export default function ProfileInfo() {
                   Log Out
                 </Button>
               )}
-              <Button asChild variant="secondary" className="h-6 flex-1 text-xs flex items-center justify-center gap-2" onClick={handleLogout}>
-                <Link href="https://buymeacoffee.com/varunraj"  target="_blank">
-                  <HandshakeIcon className="w-4 h-4" />
-                  Support
-                </Link>
-              </Button>
             </div>
           </>
         )}
       </div>
       <div className="border-t text-muted-foreground text-xs py-2 flex justify-between items-center px-2">
-        <p>
-          Made with <span className="text-red-500">&hearts;</span> by{" "}
-          <Link
-            target="_blank"
-            href="https://x.com/zathvarun"
-            className="text-primary"
-          >
-            @zathvarun
-          </Link>
-        </p>
-        <Link target="_blank" href={`https://github.com/varun-raj/immich-power-tools/releases/tag/v${version}`}>
+        <Link target="_blank" href={`https://github.com/sai80082/immich-power-tools/releases/tag/v${version}`}>
           v{version}
         </Link>
       </div>
