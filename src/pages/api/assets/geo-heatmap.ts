@@ -15,24 +15,54 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
 
-  const dbAssets = await db.select({
+  // Build query with optional LEFT JOINs based on filters
+  let query = db.select({
     assetId: assets.id,
     latitude: exif.latitude,
     longitude: exif.longitude,
   }).from(assets)
   .innerJoin(exif, eq(assets.id, exif.assetId))
-  .innerJoin(albumsAssetsAssets, eq(assets.id, albumsAssetsAssets.assetId))
-  .innerJoin(assetFaces, eq(albumsAssetsAssets.assetId, assetFaces.assetId))
-  .innerJoin(person, eq(assetFaces.personId, person.id))
-  .where(
-    and(
-      eq(assets.ownerId, currentUser.id),
-      isNotNull(exif.latitude),
-      isNotNull(exif.longitude),
-      albumIds?.length > 0 ? inArray(albumsAssetsAssets.albumId, [albumIds]) : undefined,
-      peopleIds?.length > 0 ? inArray(person.id, [peopleIds]) : undefined
-    )
-  );
+  .$dynamic();
+
+  // Only join albums table if filtering by albumIds
+  if (albumIds) {
+    query = query
+      .innerJoin(albumsAssetsAssets, eq(assets.id, albumsAssetsAssets.assetId))
+      .where(
+        and(
+          eq(assets.ownerId, currentUser.id),
+          isNotNull(exif.latitude),
+          isNotNull(exif.longitude),
+          inArray(albumsAssetsAssets.albumId, [albumIds])
+        )
+      );
+  } 
+  // Only join people table if filtering by peopleIds
+  else if (peopleIds) {
+    query = query
+      .innerJoin(assetFaces, eq(assets.id, assetFaces.assetId))
+      .innerJoin(person, eq(assetFaces.personId, person.id))
+      .where(
+        and(
+          eq(assets.ownerId, currentUser.id),
+          isNotNull(exif.latitude),
+          isNotNull(exif.longitude),
+          inArray(person.id, [peopleIds])
+        )
+      );
+  }
+  // No filters - get all assets with location
+  else {
+    query = query.where(
+      and(
+        eq(assets.ownerId, currentUser.id),
+        isNotNull(exif.latitude),
+        isNotNull(exif.longitude)
+      )
+    );
+  }
+
+  const dbAssets = await query;
   const heatmapData = dbAssets.map((asset) => [
     asset.longitude,
     asset.latitude,
