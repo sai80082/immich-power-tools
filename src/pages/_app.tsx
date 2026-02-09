@@ -34,6 +34,8 @@ App.getInitialProps = async () => {
       immichURL: ENV.IMMICH_URL,
       version: ENV.VERSION,
       geminiEnabled: !!ENV.GEMINI_API_KEY?.length,
+      oauthEnabled: ENV.OAUTH_ENABLED,
+      oauthButtonText: ENV.OAUTH_BUTTON_TEXT,
     },
   };
 };

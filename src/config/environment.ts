@@ -15,6 +15,9 @@ export const ENV = {
   GEMINI_API_KEY: process.env.GEMINI_API_KEY as string,
   IMMICH_SHARE_LINK_KEY: process.env.IMMICH_SHARE_LINK_KEY as string,
   POWER_TOOLS_ENDPOINT_URL: process.env.POWER_TOOLS_ENDPOINT_URL as string,
+  // OAuth configuration
+  OAUTH_ENABLED: process.env.OAUTH_ENABLED === 'true',
+  OAUTH_BUTTON_TEXT: (process.env.OAUTH_BUTTON_TEXT || 'Login with OAuth') as string,
 };
 
 
