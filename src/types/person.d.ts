@@ -1,7 +1,7 @@
 export interface IPerson {
   id:            string;
   name:          string;
-  birthDate:     string | null;
+  birthDate:     Date | null;
   thumbnailPath: string;
   isHidden:      boolean;
   updatedAt:     Date;
