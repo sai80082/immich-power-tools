@@ -5,6 +5,8 @@ import { updatePerson } from '@/handlers/api/people.handler';
 import { formatDate } from '@/helpers/date.helper';
 import { Input } from '../ui/input';
 import { useToast } from '../ui/use-toast';
+import { formatInTimeZone } from 'date-fns-tz';
+
 // @ts-ignore
 import chrono from 'chrono-node'
 
@@ -20,8 +22,8 @@ export default function PersonBirthdayCell(
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [textDate, setTextDate] = useState<string | null>(person.birthDate ? formatDate(person.birthDate?.toString(), 'PPP'): "");
-
+  const [textDate, setTextDate] = useState<string | null>(person.birthDate ? formatInTimeZone(new Date(person.birthDate), 'UTC', 'PPP') : null);
+  
   const handleEdit = (date?: Date | null) => {
     const formatedDate = date ? formatDate(date.toString(), 'yyyy-MM-dd') : null;
     setLoading(true);
@@ -44,8 +46,8 @@ export default function PersonBirthdayCell(
 
   return (
     <div className='flex gap-1'>
-      <Input 
-        className='' 
+      <Input
+        className=''
         value={textDate || ""}
         placeholder='Enter a date'
         onKeyDown={(e) => {
