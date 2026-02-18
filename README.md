@@ -58,7 +58,9 @@ DB_PORT = "5432"
 DB_HOST = "immich_postgres"
 
 # Optional
-GEMINI_API_KEY= # Gemini API Key
+AI_API_KEY= # API key for your OpenAI-compatible provider
+AI_BASE_URL=https://api.openai.com/v1 # Base URL for OpenAI-compatible API
+AI_MODEL=gpt-4o-mini # Model used to parse search queries in Find
 ```
 Refer here for obtaining Immich API Key: https://immich.app/docs/features/command-line-interface#obtain-the-api-key
 
@@ -145,10 +147,10 @@ Google Maps Javascript API Key is used to render the maps layer for heatmap. Whe
 
   > Code where heatmap data is plotted: [src/pages/assets/geo-heatmap.tsx:32](./src/pages/assets/geo-heatmap.tsx#L32-L35)
 
-- [Gemini](https://gemini.google.com/) for rewind video generation
-Google Gemini 1.5 Flash model is used for parsing your search query in "Find" page. We do not send any personal data to Gemini, only data that is sent to Gemini is your search query and rest of the querying happes using [Immich's Smart Search API](https://immich.app/docs/api/search-smart)
+- OpenAI-compatible AI provider for smart query parsing in Find
+Any OpenAI-compatible model can be used for parsing your search query in the "Find" page. We do not send any personal library data to the AI provider; only your search text is sent for parsing, and the actual asset querying uses [Immich's Smart Search API](https://immich.app/docs/api/search-smart)
 
-  > Code where Gemini is used: [src/helpers/gemini.helper.ts](./src/helpers/gemini.helper.ts)
+  > Code where AI parsing is used: [src/helpers/ai.helper.ts](./src/helpers/ai.helper.ts)
 
 ## Contributing
 
